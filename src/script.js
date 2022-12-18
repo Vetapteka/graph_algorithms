@@ -230,10 +230,11 @@ class Graph {
 
 }
 
-let frame = document.getElementById("graph");
+const frame = document.getElementById("graph");
 frame.onload = function () {
 
     const graph = new Graph();
+
     $.ajax({
         url: "/data/matrix.csv",
         dataType: 'text',
@@ -257,28 +258,30 @@ frame.onload = function () {
         let vertexTo;
         let limit = 100;
 
-        document.getElementById("input_from").addEventListener("change", () => {
-            vertexFrom = Number(document.getElementById("input_from").value);
-        });
-        document.getElementById("input_to").addEventListener("change", () => {
-            vertexTo = Number(document.getElementById("input_to").value);
-            hideInfoSearch();
+        const inputFrom = document.getElementById("input_from");
+        inputFrom.addEventListener("change", () => {
+            vertexFrom = +inputFrom.value;
         });
 
-        let bfsButton = document.getElementById("bfs_button");
+        const inputTo = document.getElementById("input_to");
+        inputTo.addEventListener("change", () => {
+            vertexTo = +inputTo.value;
+        });
+
+        const bfsButton = document.getElementById("bfs_button");
         bfsButton.addEventListener("click", () => {
             buttonChangeStyle(bfsButton)
             path = graph.bfs(vertexFrom, vertexTo)
         });
 
-        let dfsButton = document.getElementById("dfs_button");
+        const dfsButton = document.getElementById("dfs_button");
         dfsButton.addEventListener("click", () => {
             buttonChangeStyle(dfsButton);
             path = graph.dfs(vertexFrom, vertexTo, limit).path;
         });
 
         //depth-limited search
-        let dlsButton = document.getElementById("dls_button");
+        const dlsButton = document.getElementById("dls_button");
         dlsButton.addEventListener("click", () => {
             let inputLimit = document.getElementById("input_limit")
 
@@ -299,43 +302,52 @@ frame.onload = function () {
         });
 
         // iterative-deepening depth-first search
-        let iddfsButton = document.getElementById("iddfs_button");
+        const iddfsButton = document.getElementById("iddfs_button");
         iddfsButton.addEventListener("click", () => {
             buttonChangeStyle(iddfsButton);
-            let result = graph.dfs(vertexFrom, vertexTo, limit)
+            const result = graph.dfs(vertexFrom, vertexTo, limit)
             path = result.path;
             displayContent("глубина: " + result.depth);
         });
 
         // bidirectional search
-        let dsButton = document.getElementById("ds_button");
+        const dsButton = document.getElementById("ds_button");
         dsButton.addEventListener("click", () => {
             buttonChangeStyle(dsButton);
             path = graph.ds(vertexFrom, vertexTo, limit);
         });
 
-        let bestFirstSearchButton = document.getElementById("best_first_search_button");
+        const bestFirstSearchButton = document.getElementById("best_first_search_button");
         bestFirstSearchButton.addEventListener("click", () => {
             buttonChangeStyle(bestFirstSearchButton);
             path = graph.bestFirstSearch(vertexFrom);
         });
 
-        let searchOptimized = document.getElementById("search_optimized_button");
+        const searchOptimized = document.getElementById("search_optimized_button");
         searchOptimized.addEventListener("click", () => {
             buttonChangeStyle(searchOptimized);
             path = graph.searchOptimized(vertexFrom);
         });
 
-        let nextStepButton = document.getElementById("next_step_button");
+        const nextStepButton = document.getElementById("next_step_button");
         nextStepButton.addEventListener("click", () => {
-            let nextVertices = path.shift()
-            let startVer = nextVertices.shift()
+            nextStepButton.innerText = "следующий шаг";
+            const nextVertices = path.shift();
+            const startVer = nextVertices.shift();
             highlightVertex(startVer)
             nextVertices.forEach(v => {
                 drawPath(startVer, v);
                 highlightVertex(v);
             });
         });
+
+        const resetButton = document.getElementById("reset-btn");
+        resetButton.addEventListener("click", () => {
+                // inputFrom.value = null;
+                // inputTo.value = null;
+                window.location.reload();
+            }
+        )
 
     });
 }
@@ -346,17 +358,16 @@ function buttonChangeStyle(button) {
 }
 
 function drawPath(start, end) {
-    let svgId = "edge_" + Math.min(start, end) + "_" + Math.max(start, end);
+    const svgId = "edge_" + Math.min(start, end) + "_" + Math.max(start, end);
     frame.contentWindow.document.getElementById(svgId).setAttribute("stroke", "coral")
     displayContent([start, end])
 }
 
 function highlightVertex(vertex) {
-    let svgId = "circle_" + vertex;
+    const svgId = "circle_" + vertex;
     frame.contentWindow.document.getElementById(svgId).setAttribute("stroke", "coral")
 }
 
 function displayContent(edge) {
     document.getElementById("step-display").innerText = edge;
 }
-

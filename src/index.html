@@ -1,9 +1,9 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8" />
+    <meta charset="UTF-8"/>
     <title>lab_2</title>
-    <link rel="stylesheet" href="style.css" />
+    <link rel="stylesheet" href="style.css"/>
 </head>
 
 <body>
@@ -24,6 +24,9 @@
                     placeholder="куда (число)"
             />
         </div>
+<!--        <div class="row-container">-->
+<!--            <div class="warning" id="warning-input-from">Введите число от 1 до 26</div>-->
+<!--        </div>-->
         <div class="row-container">
             <button class="item" id="bfs_button" type="button">
                 поиск в ширину
@@ -57,19 +60,19 @@
             </button>
         </div>
         <div class="row-container">
-            <button class="item" id="ds_button" type="button">
-                двунаправленный поиск
-            </button>
-            <button
-                    class="next_step item"
+            <button class="item" id="ds_button" type="button">двунаправленный поиск</button>
+            <button class="item next-step"
                     id="next_step_button"
-                    type="button"
-            >
-                следующий шаг
+                    type="button">
+                поехали!
             </button>
         </div>
         <div class="row-container">
             <div class="item" id="step-display"></div>
+            <button class="item reset-bnt" id="reset-btn"
+                    type="reset">
+                очистить
+            </button>
         </div>
     </div>
 </div>

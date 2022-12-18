@@ -1,5 +1,6 @@
 body {
     margin: 0;
+
 }
 
 .container {
@@ -28,25 +29,21 @@ body {
 }
 
 .item {
-    font-size: 28px;
+    font-size: 27px;
     font-family: Courier, serif;
+    width: 50%;
+
     transition: color 0.2s linear;
     border: 2px solid #c7b7c7;
     border-radius: 20px;
     box-sizing: border-box;
-
     padding: 35px 30px;
-
     margin: 5px;
 }
 
 button {
-    flex-basis: 50%;
-    /* width: 48%; */
-
     color: #f0d543;
     background: #68aeba;
-
 }
 
 button:hover {
@@ -70,21 +67,33 @@ button:hover {
     border: 2px solid #68aeba;
 }
 
-.next_step {
+.next-step {
     background: coral;
     color: firebrick;
 }
 
-.next_step:active {
+.next-step:active {
     background: #f0d543;
 }
 
-.next_step:hover {
+.next-step:hover {
     color: #68aeba;
 }
 
 #step-display {
     background: white;
-    width: 100%;
+    color: firebrick;
+}
+
+.reset-bnt {
+    color: firebrick;;
+    background: rgba(199, 183, 199, 0.27);
+}
+
+.warning {
+    font-family: Courier, serif;
+    box-sizing: border-box;
+    padding: 2px 30px;
+    margin: 5px;
     color: firebrick;
 }
