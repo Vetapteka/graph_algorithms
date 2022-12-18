@@ -234,9 +234,8 @@ let frame = document.getElementById("graph");
 frame.onload = function () {
 
     const graph = new Graph();
-    console.log(graph.verticesWithInfo)
     $.ajax({
-        url: "matrix.csv",
+        url: "/data/matrix.csv",
         dataType: 'text',
     }).done(function successFunction(data) {
         const allRows = data.split(/\r?\n|\r/);
@@ -252,7 +251,6 @@ frame.onload = function () {
                 }
             }
         }
-        console.log(graph.vertices)
 
         let path;
         let vertexFrom;
@@ -264,6 +262,7 @@ frame.onload = function () {
         });
         document.getElementById("input_to").addEventListener("change", () => {
             vertexTo = Number(document.getElementById("input_to").value);
+            hideInfoSearch();
         });
 
         let bfsButton = document.getElementById("bfs_button");
@@ -327,7 +326,6 @@ frame.onload = function () {
             path = graph.searchOptimized(vertexFrom);
         });
 
-
         let nextStepButton = document.getElementById("next_step_button");
         nextStepButton.addEventListener("click", () => {
             let nextVertices = path.shift()
@@ -338,6 +336,7 @@ frame.onload = function () {
                 highlightVertex(v);
             });
         });
+
     });
 }
 
@@ -358,5 +357,6 @@ function highlightVertex(vertex) {
 }
 
 function displayContent(edge) {
-    document.getElementById("display").innerText = edge;
+    document.getElementById("step-display").innerText = edge;
 }
+
