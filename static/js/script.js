@@ -236,7 +236,7 @@ frame.onload = function () {
     const graph = new Graph();
 
     $.ajax({
-        url: "/data/matrix.csv",
+        url: "/static/data/matrix.csv",
         dataType: 'text',
     }).done(function successFunction(data) {
         const allRows = data.split(/\r?\n|\r/);
